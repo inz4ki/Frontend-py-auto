@@ -22,6 +22,7 @@ export default {
         atalho1: '',
         atalho2: '',
         atalho3: '',
+        renomear_data: '',
         fk_id_tarefa: this.$parent.pk_id_tarefa,
       },
       file: '',
@@ -31,13 +32,13 @@ export default {
   methods: {
     OpenCloseFun() {
       this.OpenClose = !this.OpenClose;
-      
+
       if (this.pk_id_etapa != -1) {
         http.get(`etapa/${this.pk_id_etapa}`).then(response => {
           this.tempEtapa = response.data;
         })
       }
-      else {}
+      else { }
     },
     salvarEtapa() {
       //ALTERAR
@@ -58,6 +59,7 @@ export default {
         form.append('acao', this.tempEtapa.acao)
         form.append('tempo_execucao', this.tempEtapa.tempo_execucao)
         form.append('digitar', this.tempEtapa.digitar)
+        form.append('renomear_data', this.tempEtapa.renomear_data)
         form.append('atalho', teclas)
         form.append('imagem', this.file)
 
@@ -83,12 +85,13 @@ export default {
           this.tempEtapa.atalho1 = ''
           this.tempEtapa.atalho2 = ''
           this.tempEtapa.atalho3 = ''
+          this.tempEtapa.renomear_data = ''
           teclas = [];
           this.numeroTeclas = 0
           this.OpenCloseFun()
           location.reload();
         })
-      }else{
+      } else {
         //SALVAR
         var form = ''
         var teclas = [];
@@ -107,7 +110,9 @@ export default {
         form.append('acao', this.tempEtapa.acao)
         form.append('tempo_execucao', this.tempEtapa.tempo_execucao)
         form.append('digitar', this.tempEtapa.digitar)
+
         form.append('atalho', teclas)
+        form.append('renomear_data', this.tempEtapa.renomear_data)
         form.append('imagem', this.file)
 
         for (const value of form.values()) {
@@ -132,14 +137,15 @@ export default {
           this.tempEtapa.atalho1 = ''
           this.tempEtapa.atalho2 = ''
           this.tempEtapa.atalho3 = ''
+          this.tempEtapa.renomear_data = ''
           this.tempEtapa.ordem = this.$parent.etapas.length
           teclas = [];
           this.numeroTeclas = 0
           this.OpenCloseFun()
           this.$parent.listarEtapas();
-        }) 
+        })
       }
-     
+
     },
     novoArquivo(event) {
       console.log(event);
@@ -187,6 +193,8 @@ export default {
                 <option value="executar app">Executar Aplicativo</option>
                 <option value="renomear arquivo">Renomear Arquivo</option>
                 <option value="fechar app">Fechar Aplicativo</option>
+                <option value="digitar data">Digitar Data</option>
+                <option value="enviar email">Enviar Email</option>
               </select>
             </div>
             <div v-if="tempEtapa.acao != 'atalho'">
@@ -231,14 +239,37 @@ export default {
                 </div>
               </div>
             </div>
-            <div v-if="tempEtapa.acao != 'digitar' && tempEtapa.acao != 'executar app' && tempEtapa.acao != 'renomear arquivo' && tempEtapa.acao != 'fechar app'">
+            <div
+              v-if="tempEtapa.acao != 'digitar' && tempEtapa.acao != 'enviar email' && tempEtapa.acao != 'executar app' && tempEtapa.acao != 'renomear arquivo' && tempEtapa.acao != 'fechar app' && tempEtapa.acao != 'digitar data'">
             </div>
             <div v-else>
-              <label v-if="tempEtapa.acao != 'executar app'">O que deve ser digitado?</label>
-              <label v-else>Digite o Caminho do Arquivo Executavel</label>
+              <label v-if="tempEtapa.acao === 'executar app'">Digite o Caminho do Arquivo Executavel</label>
+              <label v-else-if="tempEtapa.acao === 'digitar data'">Digite o Dia que será digitado</label>
+              <label v-else-if="tempEtapa.acao === 'enviar email'">Digite o Email para o qual será Enviado</label>
+              <label v-else-if="tempEtapa.acao === 'fechar app'">Digite o nome da aplicação(Gerenciador de
+                Tarefas)</label>
+              <label v-else> O que deve ser digitado?</label>
               <div>
                 <input v-model="tempEtapa.digitar" type="text" class="form-control">
               </div>
+            </div>
+            <div v-if="tempEtapa.acao === 'renomear arquivo'">
+              <label>Qual data adicionar?</label>
+              <select class="form-select">
+                <option value="atual">Dia Atual</option>
+                <option value="anterior">Dia Anterior</option>
+              </select>
+            </div>
+            <div v-if="tempEtapa.acao === 'digitar data'">
+              <label>Qual Mês?</label>
+              <select  v-model="tempEtapa.renomear_data" class="form-select">
+                <option value="atual">Mês Atual</option>
+                <option value="anterior">Mês Anterior</option>
+              </select>
+            </div>
+            <div v-if="tempEtapa.acao === 'enviar email'">
+              <label>Digite o nome do Arquivo?</label>
+              <input v-model="tempEtapa.atalho1" type="text" class="form-control">
             </div>
 
             <div>
@@ -248,6 +279,7 @@ export default {
             <div>
               <label>Tempo para Executar:</label>
               <select v-model="tempEtapa.tempo_execucao" class="form-select">
+                <option value="2">2 Segundos</option>
                 <option value="5">5 Segundos</option>
                 <option value="10">10 Segundos</option>
                 <option value="15">15 Segundos</option>
@@ -268,7 +300,8 @@ export default {
       </div>
     </div>
   </div>
-  <button v-if="this.pk_id_etapa != -1" type="button" @click="OpenCloseFun()" :class="'btn btn-' + variant">Alterar</button>
+  <button v-if="this.pk_id_etapa != -1" type="button" @click="OpenCloseFun()"
+    :class="'btn btn-' + variant">Alterar</button>
   <button v-else type="button" @click="OpenCloseFun()" :class="'btn btn-' + variant">Incluir Etapa</button>
 </template>
 <style scoped>
@@ -283,5 +316,4 @@ label {
 .fundo {
   background-color: rgb(224, 224, 224);
   border: 2px solid black;
-}
-</style>
+}</style>
