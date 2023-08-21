@@ -23,7 +23,7 @@ export default {
         atalho2: '',
         atalho3: '',
         renomear_data: '',
-        fk_id_tarefa: this.$parent.pk_id_tarefa,
+        fk_id_tarefa_etapa: this.$parent.pk_id_tarefa,
       },
       file: '',
       numeroTeclas: 0
@@ -54,7 +54,7 @@ export default {
           teclas.push(this.tempEtapa.atalho3);
         }
         form = new FormData()
-        form.append('fk_id_tarefa', this.tempEtapa.fk_id_tarefa)
+        form.append('fk_id_tarefa_etapa', this.tempEtapa.fk_id_tarefa_etapa)
         form.append('nome_etapa', this.tempEtapa.nome_etapa)
         form.append('acao', this.tempEtapa.acao)
         form.append('tempo_execucao', this.tempEtapa.tempo_execucao)
@@ -104,7 +104,7 @@ export default {
         }
         this.tempEtapa.ordem = this.$parent.etapas.length
         form = new FormData()
-        form.append('fk_id_tarefa', this.tempEtapa.fk_id_tarefa)
+        form.append('fk_id_tarefa_etapa', this.tempEtapa.fk_id_tarefa_etapa)
         form.append('ordem', this.tempEtapa.ordem + 1)
         form.append('nome_etapa', this.tempEtapa.nome_etapa)
         form.append('acao', this.tempEtapa.acao)
@@ -189,12 +189,13 @@ export default {
                 <option value="clicar 2x">Clicar 2X</option>
                 <option value="digitar">Clicar e Digitar</option>
                 <option value="clicar com direito">Clicar com o Botão Direito do Mouse</option>
-                <option value="atalho">Utilizar Tecla de Atalho</option>
-                <option value="executar app">Executar Aplicativo</option>
-                <option value="renomear arquivo">Renomear Arquivo</option>
-                <option value="fechar app">Fechar Aplicativo</option>
                 <option value="digitar data">Digitar Data</option>
                 <option value="enviar email">Enviar Email</option>
+                <option value="executar app">Executar Aplicativo</option>
+                <option value="fechar app">Fechar Aplicativo</option>
+                <option value="renomear arquivo">Renomear Arquivo</option>
+                <option value="atalho">Utilizar Tecla de Atalho</option>
+                <option value="Se...se não...">Se...se não...</option>
               </select>
             </div>
             <div v-if="tempEtapa.acao != 'atalho'">
@@ -240,7 +241,7 @@ export default {
               </div>
             </div>
             <div
-              v-if="tempEtapa.acao != 'digitar' && tempEtapa.acao != 'enviar email' && tempEtapa.acao != 'executar app' && tempEtapa.acao != 'renomear arquivo' && tempEtapa.acao != 'fechar app' && tempEtapa.acao != 'digitar data'">
+              v-if="tempEtapa.acao != 'digitar' && tempEtapa.acao != 'enviar email' && tempEtapa.acao != 'executar app' && tempEtapa.acao != 'renomear arquivo' && tempEtapa.acao != 'fechar app' && tempEtapa.acao != 'digitar data' && tempEtapa.acao != 'Se...se não...'">
             </div>
             <div v-else>
               <label v-if="tempEtapa.acao === 'executar app'">Digite o Caminho do Arquivo Executavel</label>
@@ -248,6 +249,7 @@ export default {
               <label v-else-if="tempEtapa.acao === 'enviar email'">Digite o Email para o qual será Enviado</label>
               <label v-else-if="tempEtapa.acao === 'fechar app'">Digite o nome da aplicação(Gerenciador de
                 Tarefas)</label>
+                <label v-else-if="tempEtapa.acao === 'Se...se não...'">Digite o id da Tarefa Filha</label>
               <label v-else> O que deve ser digitado?</label>
               <div>
                 <input v-model="tempEtapa.digitar" type="text" class="form-control">
@@ -261,17 +263,17 @@ export default {
               </select>
             </div>
             <div v-if="tempEtapa.acao === 'digitar data'">
-              <label>Qual Mês?</label>
+              <label>Qual Opção?</label>
               <select  v-model="tempEtapa.renomear_data" class="form-select">
                 <option value="atual">Mês Atual</option>
                 <option value="anterior">Mês Anterior</option>
+                <option value="semana">Dia da Semana</option>
               </select>
             </div>
             <div v-if="tempEtapa.acao === 'enviar email'">
               <label>Digite o nome do Arquivo?</label>
               <input v-model="tempEtapa.atalho1" type="text" class="form-control">
             </div>
-
             <div>
               <label>Print do item que você gostaria de interagir:</label>
               <input class="form-control" type="file" accept="image/png, image/gif, image/jpeg" @change="novoArquivo">
@@ -286,7 +288,10 @@ export default {
                 <option value="20">20 Segundos</option>
                 <option value="25">25 Segundos</option>
                 <option value="30">30 Segundos</option>
-                <option value="35">35 Segundos</option>
+                <option value="40">40 Segundos</option>
+                <option value="50">50 Segundos</option>
+                <option value="60">60 Segundos</option>
+                <option value="120">120 Segundos</option>
               </select>
             </div>
           </div>

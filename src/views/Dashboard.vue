@@ -72,7 +72,7 @@ export default {
             </thead>
             <tbody class="text-center align-middle">
                 <tr v-for="tarefa_log in  sortedtarefa_log" :key="tarefa_log.pk_id_tarefa_log">
-                    <th>{{ tarefa_log.fk_id_tarefa }}</th>
+                    <th>{{ tarefa_log.fk_id_tarefa_log }}</th>
                     <td>{{ tarefa_log.nome_etapa }}</td>
                     <td>{{ formatDate(tarefa_log.data_hora) }}</td>
                     <td><button @click="verErro('https://apibot.stv.com.br/storage/' + tarefa_log.caminho)"

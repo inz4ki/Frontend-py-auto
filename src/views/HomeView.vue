@@ -1,5 +1,6 @@
 <script>
 import ModalTarefa from '../components/ModalTarefa.vue'
+import ModalErroCadastro from '../components/ModalErroCadastro.vue'
 import { http } from '../service/api'
 import Cookie from 'js-cookie';
 import moment from 'moment'
@@ -7,6 +8,7 @@ import moment from 'moment'
 export default {
   components: {
     ModalTarefa,
+    ModalErroCadastro,
   },
   data() {
     return {
@@ -65,10 +67,11 @@ export default {
         </tr>
       </thead>
       <tbody class="text-center align-middle">
-        <tr v-for="tarefa in  tarefa" :key="tarefa.pk_id_tarefa">
+        <tr v-for="tarefa in  tarefa" :key="tarefa.pk_id_tarefa" :class="{ 'filha': tarefa.dia_da_semana == 'Tarefa Filha'}">
           <th>{{ tarefa.pk_id_tarefa }}</th>
           <td>{{ tarefa.nome_tarefa }}</td>
-          <td>{{ tarefa.hora_executar }}</td>
+          <td v-if="tarefa.hora_executar != '00:00:00'">{{ tarefa.hora_executar }}</td>
+          <td v-else></td>
           <td>{{ tarefa.estado }}</td>
           <td class="text-uppercase fw-bold">{{ tarefa.dia_da_semana }}</td>
           <td>
@@ -80,6 +83,7 @@ export default {
                 <ModalTarefa :pk_id_tarefa="tarefa.pk_id_tarefa" variant="outline-success btn-sm"></ModalTarefa>
                 <button @click="clonarTarefa(tarefa.pk_id_tarefa)" class="btn btn-outline-success btn-sm">Clonar
                   Tarefa</button>
+                  <ModalErroCadastro :pk_id_tarefa="tarefa.pk_id_tarefa" variant="outline-success btn-sm"></ModalErroCadastro>
               </div>
             </div>
           </td>
@@ -95,9 +99,8 @@ export default {
 h1 {
   margin-top: 15px;
 }
-
-.diminuir {
-  padding: px;
+.filha{
+  background-color: rgb(201, 243, 203);
 }
 form{
   margin-bottom: 10px;

@@ -15,7 +15,7 @@ export default {
             tempTarefa: {
                 pk_id_tarefa: -1,
                 nome_tarefa: '',
-                hora_executar: '',
+                hora_executar: 0,
                 dia_da_semana: '',
                 estado: 'não executado'
             },
@@ -62,6 +62,9 @@ export default {
                 if (this.tempTarefa.dia_da_semana === 'Trimestral') {
                     this.diaMes = moment(this.diaMes).format('DD/MM/YYYY')
                     this.tempTarefa.dia_da_semana = this.diaMes
+                }
+                if (this.tempTarefa.dia_da_semana === 'Tarefa Filha') {
+                    this.tempTarefa.hora_executar = '00:00:00'
                 }
 
 
@@ -125,6 +128,10 @@ export default {
                         this.diaMes = moment(this.diaMes).format('DD/MM/YYYY')
                         this.tempTarefa.dia_da_semana = this.diaMes
                     }
+                    if (this.tempTarefa.dia_da_semana === 'Tarefa Filha') {
+                        this.tempTarefa.hora_executar = moment().format('hh:mm:ss')
+
+                    }
                     form.append('dia_da_semana', this.tempTarefa.dia_da_semana)
                 }
 
@@ -185,15 +192,12 @@ export default {
                             <input v-model="tempTarefa.nome_tarefa" class="form-control" name="NomeTarefa">
                         </div>
                         <div>
-                            <Label>Hora de Execução</Label>
-                            <input v-model="tempTarefa.hora_executar" class="form-control" type="time">
-                        </div>
-                        <div>
                             <Label>Dia da Execução</Label>
                             <select v-model="tempTarefa.dia_da_semana" class="form-select">
                                 <option value="Semanal">Semanal</option>
                                 <option value="Mensal">Mensal</option>
                                 <option value="Trimestral">Trimestral</option>
+                                <option value="Tarefa Filha">Tarefa Filha</option>
                             </select>
                         </div>
                         <div v-if="tempTarefa.dia_da_semana === 'Semanal'">
@@ -265,6 +269,11 @@ export default {
                             <label>Escolha a Data de Inicio : </label>
                             <input class="form-control" v-model="diaMes" type="date">
                         </div>
+                        <div v-if="tempTarefa.dia_da_semana !== 'Tarefa Filha'">
+                            <Label>Hora de Execução</Label>
+                            <input v-model="tempTarefa.hora_executar" class="form-control" type="time">
+                        </div>
+
                     </div>
                 </div>
                 <div class="text-center botao">
