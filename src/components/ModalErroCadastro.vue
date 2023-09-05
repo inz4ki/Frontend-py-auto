@@ -107,7 +107,7 @@ export default {
         </div>
     </div>
     <button v-if="this.pk_id_tarefa != undefined" type="button" @click="OpenCloseFun()"
-        :class="'btn btn-' + variant">Cadastrar Erro</button>
+        :class="'btn btn-' + variant">Cadastrar Obstaculo</button>
     <button v-else type="button" @click="OpenCloseFun()" :class="'btn btn-' + variant">Incluir</button>
 </template>
 <style scoped>

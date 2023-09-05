@@ -4,6 +4,7 @@ import moment from 'moment'
 export default {
     data() {
         return {
+            pk_id_tarefa: this.$route.params.pk_id_tarefa,
             tarefa_log: [],
             currentSort: 'name',
             currentSortDir: 'asc',
@@ -16,9 +17,18 @@ export default {
     },
     methods: {
         listarLogs() {
-            http.get(`log`).then(response => {
-                this.tarefa_log = response.data;
-            })
+            if (this.pk_id_tarefa == null) {
+                http.get(`log`).then(response => {
+                    this.tarefa_log = response.data;
+                })
+            } else {
+                http.get(`log/tarefa/${this.pk_id_tarefa}`).then(response => {
+                    this.tarefa_log = response.data;
+                })
+
+
+
+            }
         },
         formatDate(date) {
             return moment(date).format('DD/MM/YYYY HH:mm')

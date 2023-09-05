@@ -38,6 +38,14 @@ const routes = [
     component: () => import('../views/Dashboard.vue'),
     beforeEnter: GuardUsuario.auth
   },
+  {
+    path: '/dashboard/:pk_id_tarefa',
+    name: 'dashboard tarefa',
+    component: Dashboard,
+    meta:{layout:'admin'},
+    component: () => import('../views/Dashboard.vue'),
+    beforeEnter: GuardUsuario.auth
+  },
 ]
 
 const router = createRouter({

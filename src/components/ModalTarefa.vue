@@ -17,6 +17,7 @@ export default {
                 nome_tarefa: '',
                 hora_executar: 0,
                 dia_da_semana: '',
+                equipe:'',
                 estado: 'não executado'
             },
             dias: [],
@@ -76,6 +77,7 @@ export default {
                     this.tempTarefa.nome_tarefa = ''
                     this.tempTarefa.hora_executar = ''
                     this.tempTarefa.dia_da_semana = ''
+                    this.tempTarefa.equipe = ''
                     this.dias = []
                     // this.$router.push({name:'etapas', params:{ pk_id_tarefa: tarefa.pk_id_tarefa }})
                 })
@@ -117,6 +119,7 @@ export default {
                 form = new FormData()
                 form.append('nome_tarefa', this.tempTarefa.nome_tarefa)
                 form.append('hora_executar', this.tempTarefa.hora_executar)
+                form.append('equipe', this.tempTarefa.equipe)
 
                 if (this.tempTarefa.dia_da_semana === 'Semanal') {
                     form.append('dia_da_semana', dia_da_semana)
@@ -148,6 +151,7 @@ export default {
                     this.tempTarefa.nome_tarefa = ''
                     this.tempTarefa.hora_executar = ''
                     this.tempTarefa.dia_da_semana = ''
+                    this.tempTarefa.equipe = ''
                     this.dias = []
                     // this.$router.push({name:'etapas', params:{ pk_id_tarefa: tarefa.pk_id_tarefa }})
                 })
@@ -161,6 +165,7 @@ export default {
                             this.tempTarefa.hora_executar = ''
                             this.tempTarefa.dia_da_semana = ''
                             this.dias = []
+                            this.tempTarefa.equipe = ''
                         } else {
                             console.log(error);
                             alert('Erro ao cadastrar!');
@@ -272,6 +277,14 @@ export default {
                         <div v-if="tempTarefa.dia_da_semana !== 'Tarefa Filha'">
                             <Label>Hora de Execução</Label>
                             <input v-model="tempTarefa.hora_executar" class="form-control" type="time">
+                        </div>
+                        <div>
+                            <Label>Selecione a Equipe</Label>
+                            <select v-model="tempTarefa.equipe" class="form-select">
+                                <option value="Cobranca">Cobrança</option>
+                                <option value="Departamento Pessoal">Departamento Pessoal</option>
+                                <option value="Faturamento">Faturamento</option>
+                            </select>
                         </div>
 
                     </div>
