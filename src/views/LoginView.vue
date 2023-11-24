@@ -26,7 +26,6 @@ export default {
                         Cookie.set('id', response.data.id);
                         Cookie.set('_usuario_token', response.data._usuario_token);
                         this.$router.push('/');
-                        // localStorage.setItem('user', JSON.stringify(response.data));
                     }
                 }).catch((error) => {
                     console.log(error.response.status);

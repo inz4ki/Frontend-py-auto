@@ -157,10 +157,8 @@ export default {
           <button class="btn btn-lg btn-outline-danger" @click="deletarTarefa(tarefa)">Excluir Tarefa</button>
           <button @click="desativar()" class="btn btn-lg btn-outline-warning">Desativar Tarefa</button>
           <button @click="reiniciarEstado()" class="btn btn-lg btn-outline-primary">Reiniciar Estado</button>
-
           <ModalCadastro class="row" :pk_id_etapa="-1" variant="outline-success btn-lg">
           </ModalCadastro>
-
         </div>
       </div>
     </div>

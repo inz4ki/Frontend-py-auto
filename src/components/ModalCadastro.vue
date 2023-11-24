@@ -249,7 +249,7 @@ export default {
               <label v-else-if="tempEtapa.acao === 'enviar email'">Digite o Email para o qual será Enviado</label>
               <label v-else-if="tempEtapa.acao === 'fechar app'">Digite o nome da aplicação(Gerenciador de
                 Tarefas)</label>
-                <label v-else-if="tempEtapa.acao === 'Se...se não...'">Digite o id da Tarefa Filha</label>
+              <label v-else-if="tempEtapa.acao === 'Se...se não...'">Digite o id da Tarefa Filha</label>
               <label v-else> O que deve ser digitado?</label>
               <div>
                 <input v-model="tempEtapa.digitar" type="text" class="form-control">
@@ -264,7 +264,7 @@ export default {
             </div>
             <div v-if="tempEtapa.acao === 'digitar data'">
               <label>Qual Opção?</label>
-              <select  v-model="tempEtapa.renomear_data" class="form-select">
+              <select v-model="tempEtapa.renomear_data" class="form-select">
                 <option value="atual">Mês Atual</option>
                 <option value="anterior">Mês Anterior</option>
                 <option value="semana">Dia da Semana</option>
@@ -321,4 +321,5 @@ label {
 .fundo {
   background-color: rgb(224, 224, 224);
   border: 2px solid black;
-}</style>
+}
+</style>

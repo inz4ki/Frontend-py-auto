@@ -11,7 +11,7 @@ const routes = [
     path: '/',
     name: 'home',
     component: HomeView,
-    meta:{layout:'admin'},
+    meta: { layout: 'admin' },
     beforeEnter: GuardUsuario.auth
   },
   {
@@ -19,22 +19,22 @@ const routes = [
     name: 'etapas',
     component: EtapaView,
     component: () => import('../views/EtapaView.vue'),
-    meta:{layout:'admin'},
+    meta: { layout: 'admin' },
     beforeEnter: GuardUsuario.auth
-    
+
   },
   {
     path: '/login',
     name: 'login',
     component: LoginView,
-    meta:{layout:'default'},
+    meta: { layout: 'default' },
     component: () => import('../views/LoginView.vue')
   },
   {
     path: '/dashboard',
     name: 'dashboard',
     component: Dashboard,
-    meta:{layout:'admin'},
+    meta: { layout: 'admin' },
     component: () => import('../views/Dashboard.vue'),
     beforeEnter: GuardUsuario.auth
   },
@@ -42,7 +42,7 @@ const routes = [
     path: '/dashboard/:pk_id_tarefa',
     name: 'dashboard tarefa',
     component: Dashboard,
-    meta:{layout:'admin'},
+    meta: { layout: 'admin' },
     component: () => import('../views/Dashboard.vue'),
     beforeEnter: GuardUsuario.auth
   },

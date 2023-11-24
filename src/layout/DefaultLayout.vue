@@ -17,5 +17,4 @@ footer {
     height: 100px;
     background-color: black;
 }
-
 </style>

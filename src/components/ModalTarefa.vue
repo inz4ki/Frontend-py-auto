@@ -17,7 +17,7 @@ export default {
                 nome_tarefa: '',
                 hora_executar: 0,
                 dia_da_semana: '',
-                equipe:'',
+                equipe: '',
                 estado: 'não executado'
             },
             dias: [],
@@ -68,7 +68,6 @@ export default {
                     this.tempTarefa.hora_executar = '00:00:00'
                 }
 
-
                 http.put(`tarefa/atualizar/${this.pk_id_tarefa}`, this.tempTarefa,
                     http.defaults.headers.Authorization = 'Bearer ' + Cookie.get('_usuario_token'),
                 ).then(response => {
@@ -79,7 +78,6 @@ export default {
                     this.tempTarefa.dia_da_semana = ''
                     this.tempTarefa.equipe = ''
                     this.dias = []
-                    // this.$router.push({name:'etapas', params:{ pk_id_tarefa: tarefa.pk_id_tarefa }})
                 })
                     .catch(error => {
                         console.log(error.response.status);
@@ -153,7 +151,6 @@ export default {
                     this.tempTarefa.dia_da_semana = ''
                     this.tempTarefa.equipe = ''
                     this.dias = []
-                    // this.$router.push({name:'etapas', params:{ pk_id_tarefa: tarefa.pk_id_tarefa }})
                 })
                     .catch(error => {
                         console.log(error.response.status);

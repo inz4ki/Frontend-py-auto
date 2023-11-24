@@ -22,7 +22,6 @@ export default {
   },
   methods: {
     listarTarefas() {
-      // pegando info das vagas da api
       http.get(`tarefas`).then(response => {
         this.tarefa = response.data;
       })
@@ -55,7 +54,6 @@ export default {
       <h1>Criador de Tarefas</h1>
       <hr>
     </div>
-    <!-- TESTE -->
     <!-- COBRANCA -->
     <div>
       <div class="row">
@@ -73,7 +71,7 @@ export default {
                 <th>Nome da Tarefa</th>
                 <th>Horário</th>
                 <th>Estado</th>
-                <th>Dias Da Semana</th>
+                <th>Data de Execução</th>
                 <th></th>
               </tr>
             </thead>
@@ -99,7 +97,8 @@ export default {
                         Tarefa</button>
                       <ModalErroCadastro :pk_id_tarefa="tarefa.pk_id_tarefa" variant="outline-success btn-sm">
                       </ModalErroCadastro>
-                      <router-link class="btn-group link" :to="{ name: 'dashboard tarefa', params: { pk_id_tarefa: tarefa.pk_id_tarefa } }">
+                      <router-link class="btn-group link"
+                        :to="{ name: 'dashboard tarefa', params: { pk_id_tarefa: tarefa.pk_id_tarefa } }">
                         <button class="btn btn-outline-success btn-sm">Ver
                           Erros</button>
                       </router-link>
@@ -129,7 +128,7 @@ export default {
                 <th>Nome da Tarefa</th>
                 <th>Horário</th>
                 <th>Estado</th>
-                <th>Dias Da Semana</th>
+                <th>Data de Execução</th>
                 <th></th>
               </tr>
             </thead>
@@ -155,7 +154,8 @@ export default {
                         Tarefa</button>
                       <ModalErroCadastro :pk_id_tarefa="tarefa.pk_id_tarefa" variant="outline-success btn-sm">
                       </ModalErroCadastro>
-                      <router-link class="btn-group link" :to="{ name: 'dashboard tarefa', params: { pk_id_tarefa: tarefa.pk_id_tarefa } }">
+                      <router-link class="btn-group link"
+                        :to="{ name: 'dashboard tarefa', params: { pk_id_tarefa: tarefa.pk_id_tarefa } }">
                         <button class="btn btn-outline-success btn-sm">Ver
                           Erros</button>
                       </router-link>
@@ -185,12 +185,12 @@ export default {
                 <th>Nome da Tarefa</th>
                 <th>Horário</th>
                 <th>Estado</th>
-                <th>Dias Da Semana</th>
+                <th>Data de Execução</th>
                 <th></th>
               </tr>
             </thead>
             <tbody class="text-center align-middle">
-              <tr v-for="tarefa in  tarefa" :key="tarefa.pk_id_tarefa"
+              <tr v-for="tarefa in  tarefa" :key="tarefa.nome_tarefa"
                 :class="{ 'controleTabelas': tarefa.equipe != 'Faturamento' }">
                 <th>{{ tarefa.pk_id_tarefa }}</th>
                 <td>{{ tarefa.nome_tarefa }}</td>
@@ -211,7 +211,8 @@ export default {
                         Tarefa</button>
                       <ModalErroCadastro :pk_id_tarefa="tarefa.pk_id_tarefa" variant="outline-success btn-sm">
                       </ModalErroCadastro>
-                      <router-link class="btn-group link" :to="{ name: 'dashboard tarefa', params: { pk_id_tarefa: tarefa.pk_id_tarefa } }">
+                      <router-link class="btn-group link"
+                        :to="{ name: 'dashboard tarefa', params: { pk_id_tarefa: tarefa.pk_id_tarefa } }">
                         <button class="btn btn-outline-success btn-sm">Ver
                           Erros</button>
                       </router-link>
@@ -224,7 +225,6 @@ export default {
         </div>
       </div>
     </div>
-    <!-- FIM DE TESTE -->
     <form @submit.prevent="listarTarefas()">
       <ModalTarefa variant="success"></ModalTarefa>
     </form>
