@@ -7,7 +7,6 @@ export default {
         if (!token) {
             next({ name: 'login' });
         } else {
-            console.log('passou')
             next();
         }
     }

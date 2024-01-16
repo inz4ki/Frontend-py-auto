@@ -21,20 +21,17 @@ export default {
             index_sucesso: '',
             index_erro30: '',
             index_sucesso30: '',
+
         }
     },
-
     mounted() {
         this.listarLogs();
-
         setTimeout(() => {
             this.verGraficosErros();
         }, 1000)
-
         setTimeout(() => {
             this.verGraficosErros30();
         }, 1000)
-
     },
     methods: {
         listarLogs() {
@@ -61,6 +58,7 @@ export default {
                     this.index_erro30 = this.log_erro30.length;
                     this.index_sucesso30 = this.log_sucesso30.length;
                 })
+               
             }
         },
         formatDate(date) {

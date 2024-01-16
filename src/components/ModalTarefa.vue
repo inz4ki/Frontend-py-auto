@@ -271,16 +271,17 @@ export default {
                             <label>Escolha a Data de Inicio : </label>
                             <input class="form-control" v-model="diaMes" type="date">
                         </div>
-                        <div v-if="tempTarefa.dia_da_semana !== 'Tarefa Filha'">
+                        <!-- <div v-if="tempTarefa.dia_da_semana !== 'Tarefa Filha'">
                             <Label>Hora de Execução</Label>
                             <input v-model="tempTarefa.hora_executar" class="form-control" type="time">
-                        </div>
+                        </div> -->
                         <div>
                             <Label>Selecione a Equipe</Label>
                             <select v-model="tempTarefa.equipe" class="form-select">
                                 <option value="Cobranca">Cobrança</option>
                                 <option value="Departamento Pessoal">Departamento Pessoal</option>
                                 <option value="Faturamento">Faturamento</option>
+                                <option value="TI">TI</option>
                             </select>
                         </div>
 
